@@ -2,98 +2,87 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Smart POS - Barcode Scanner</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      margin: 20px;
-      background: #f9f9f9;
-    }
-    h2 {
-      text-align: center;
-    }
-    .container {
-      display: flex;
-      justify-content: flex-start;
-      align-items: flex-start;
-      gap: 30px;
-      margin-top: 20px;
-      flex-wrap: wrap;
-    }
-    #reader {
-      width: 320px;
-      height: 240px;
-      border: 3px solid #007bff;
-      border-radius: 10px;
-      overflow: hidden;
-      background: #000;
-    }
-    table {
-      width: 500px;
-      border-collapse: collapse;
-      background: white;
-      border-radius: 10px;
-      overflow: hidden;
-    }
-    th, td {
-      border-bottom: 1px solid #ddd;
-      padding: 10px;
-      text-align: center;
-    }
-    th {
-      background: #007bff;
-      color: white;
-    }
-    #generateInvoice {
-      display: block;
-      margin: 20px auto;
-      padding: 12px 25px;
-      background: #28a745;
-      color: white;
-      border: none;
-      border-radius: 7px;
-      cursor: pointer;
-      font-size: 16px;
-    }
-    #generateInvoice:hover {
-      background: #1e7e34;
-    }
-    .deleteBtn {
-      background: red;
-      color: white;
-      border: none;
-      padding: 5px 10px;
-      cursor: pointer;
-      border-radius: 5px;
-    }
-  </style>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Smart POS - Fast Billing System</title>
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
 </head>
+
 <body>
 
-  <h2>Scan Product Barcode</h2>
+  <!-- Header -->
+  <header class="header">
+    <div class="logo">
+      <i class="fas fa-cash-register"></i>
+      <span>Smart POS</span>
+    </div>
+    <h1>Quick Billing Counter</h1>
+  </header>
 
-  <div class="container">
-    <!-- Scanner -->
-    <div id="reader"></div>
+  <div class="main-container">
 
-    <!-- Invoice Table -->
-    <table id="invoiceTable">
-      <thead>
-        <tr>
-          <th>Product</th>
-          <th>Qty</th>
-          <th>Price (₹)</th>
-          <th>Delete</th>
-        </tr>
-      </thead>
-      <tbody></tbody>
-    </table>
+    <!-- Left Column: Scanner -->
+    <div class="scanner-section">
+      <h2><i class="fas fa-camera"></i> Scan Barcode</h2>
+
+      <!-- Scanner container (required by JS) -->
+      <div id="reader"></div>
+
+      <div class="scanner-info">
+        <p>Point the camera at a product barcode</p>
+      </div>
+    </div>
+
+    <!-- Right Column: Billing Cart -->
+    <div class="cart-section">
+
+      <div class="cart-header">
+        <h2><i class="fas fa-shopping-cart"></i> Current Bill</h2>
+
+        <!-- Total amount (JS updates this) -->
+        <div class="total-amount" id="totalAmount">₹0.00</div>
+      </div>
+
+      <div class="table-container">
+
+        <!-- Invoice Table -->
+        <table id="invoiceTable">
+          <thead>
+            <tr>
+              <th>Item</th>
+              <th>Qty</th>
+              <th>Price</th>
+              <th>Total</th>
+              <th></th>
+            </tr>
+          </thead>
+
+          <tbody id="cartBody">
+            <!-- JS inserts rows here -->
+          </tbody>
+        </table>
+
+        <!-- Empty state (JS toggles this) -->
+        <div class="empty-cart" id="emptyCart">
+          <i class="fas fa-receipt fa-3x"></i>
+          <p>No items added yet.<br>Start scanning products!</p>
+        </div>
+
+      </div>
+
+      <!-- Generate PDF Button -->
+      <button id="generateInvoice">
+        <i class="fas fa-file-invoice"></i> Generate Bill & Print
+      </button>
+
+    </div>
   </div>
 
-  <button id="generateInvoice">Generate Invoice</button>
-
+  <!-- JS -->
   <script src="https://unpkg.com/html5-qrcode"></script>
   <script src="{{ url_for('static', filename='js/scanner.js') }}"></script>
-
 </body>
 </html>

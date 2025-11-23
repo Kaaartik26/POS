@@ -3,5 +3,6 @@
   {"barcode": "8909876543210", "name": "Cashews 500g", "price": 480},
   {"barcode": "8901112223334", "name": "Pistachios 200g", "price": 320},
   {"barcode": "8902442227309", "name": "Notebook", "price": 100},
-  {"barcode": "8906082880177", "name": "Chips", "price": 450}
+  {"barcode": "8906082880177", "name": "Chips", "price": 450},
+  {"barcode": "8906076132954", "name": "Biscuits", "price": 500}
 ]

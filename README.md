@@ -38,7 +38,7 @@ Items remain stored as long as the session is active.
 
 ![ReportLab](https://img.shields.io/badge/ReportLab-PDF--Generator-red)
 
-📦 **Installation & Setup**
+**Installation & Setup**
 1️⃣ Clone the repository
 git clone https://github.com/your-username/your-repo.git
 cd your-repo

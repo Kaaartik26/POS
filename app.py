@@ -15,7 +15,8 @@ with open("products.json", "r") as f:
     PRODUCTS = json.load(f)
 
 
-# Homepage@app.route("/")
+# Homepage
+@app.route("/")
 def home():
     return render_template("invoice.html")
 
