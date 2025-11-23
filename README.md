@@ -26,15 +26,19 @@ Items remain stored as long as the session is active.
 
 🛠️ Tech Stack
 
-Python 3
+![Python](https://img.shields.io/badge/Python-3776AB?logo=python&logoColor=white)
 
-Flask
+![Flask](https://img.shields.io/badge/Flask-000000?logo=flask&logoColor=white)
 
-HTML / CSS / JavaScript
+![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?logo=javascript&logoColor=black)
 
-ReportLab (for PDF creation)
+![CSS3](https://img.shields.io/badge/CSS3-1572B6?logo=css3&logoColor=white)
 
-📦 Installation & Setup
+![HTML5](https://img.shields.io/badge/HTML5-E34F26?logo=html5&logoColor=white)
+
+![ReportLab](https://img.shields.io/badge/ReportLab-PDF--Generator-red)
+
+📦 **Installation & Setup**
 1️⃣ Clone the repository
 git clone https://github.com/your-username/your-repo.git
 cd your-repo
@@ -47,19 +51,6 @@ python app.py
 
 4️⃣ Open in browser
 http://127.0.0.1:5000/
-
-📁 Project Structure
-.
-├── app.py
-├── templates/
-│   ├── invoice.html
-│   └── index.html
-├── static/
-│   ├── scanner.js
-│   └── style.css
-├── products.json
-├── requirements.txt
-└── README.md
 
 📝 How It Works
 
