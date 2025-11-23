@@ -1,0 +1,28 @@
+body {
+  font-family: Arial, sans-serif;
+  text-align: center;
+  background: #f9f9f9;
+}
+
+h2 {
+  margin-top: 20px;
+}
+
+table {
+  margin: 20px auto;
+  border-collapse: collapse;
+  width: 60%;
+}
+
+th, td {
+  padding: 10px;
+}
+
+button {
+  padding: 10px 20px;
+  background: #3b82f6;
+  border: none;
+  color: white;
+  border-radius: 5px;
+  cursor: pointer;
+}
