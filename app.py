@@ -10,24 +10,17 @@ from reportlab.lib import colors
 app = Flask(__name__)
 app.secret_key = "secret-key"
 
-# ------------------------------------------------
 # Load Product List (from products.json)
-# ------------------------------------------------
 with open("products.json", "r") as f:
     PRODUCTS = json.load(f)
 
 
-# ------------------------------------------------
-# Homepage
-# ------------------------------------------------
-@app.route("/")
+# Homepage@app.route("/")
 def home():
     return render_template("invoice.html")
 
 
-# ------------------------------------------------
 # Lookup Barcode + Add or Increment Quantity
-# ------------------------------------------------
 @app.route("/lookup", methods=["POST"])
 def lookup():
     barcode = request.json.get("barcode", "").strip()
@@ -37,20 +30,17 @@ def lookup():
     if not product:
         return jsonify({"error": f"Product not found for {barcode}"}), 404
 
-    # Initialize invoice session
     if "invoice" not in session:
         session["invoice"] = []
 
     invoice = session["invoice"]
 
-    # Check if barcode already exists → increase qty
     for item in invoice:
         if item["barcode"] == barcode:
             item["qty"] += 1
             session.modified = True
             return jsonify(item)
 
-    # Otherwise add new item with qty = 1
     product_copy = {
         "name": product["name"],
         "price": product["price"],
@@ -64,9 +54,7 @@ def lookup():
     return jsonify(product_copy)
 
 
-# ------------------------------------------------
 # Delete Item from Invoice
-# ------------------------------------------------
 @app.route("/delete_item", methods=["POST"])
 def delete_item():
     barcode = request.json.get("barcode")
@@ -80,9 +68,7 @@ def delete_item():
     return jsonify({"status": "deleted"})
 
 
-# ------------------------------------------------
 # Generate Invoice PDF
-# ------------------------------------------------
 @app.route("/generate_invoice")
 def generate_invoice():
     invoice_items = session.get("invoice", [])
@@ -153,8 +139,6 @@ def generate_invoice():
                      mimetype="application/pdf")
 
 
-# ------------------------------------------------
 # Run App
-# ------------------------------------------------
 if __name__ == "__main__":
     app.run(debug=True)

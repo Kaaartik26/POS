@@ -1,15 +1,13 @@
 let lastScanned = null;
 let scanLocked = false;
-let items = {};  // store qty locally: { barcode: {name, price, qty} }
+let items = {};  
 
-// -----------------------------------------
 // Handle successful scan
-// -----------------------------------------
 function onScanSuccess(decodedText) {
     if (scanLocked) return;
     scanLocked = true;
 
-    if (decodedText === lastScanned) return;  // avoid spam repeat
+    if (decodedText === lastScanned) return;  
     lastScanned = decodedText;
 
     fetch("/lookup", {
@@ -32,9 +30,7 @@ function onScanSuccess(decodedText) {
     });
 }
 
-// -----------------------------------------
 // Add new item OR increment quantity
-// -----------------------------------------
 function addOrIncrementItem(product) {
     if (items[product.barcode]) {
         items[product.barcode].qty++;
@@ -49,9 +45,7 @@ function addOrIncrementItem(product) {
     }
 }
 
-// -----------------------------------------
 // Add new row to table
-// -----------------------------------------
 function addRow(product) {
     const tbody = document.querySelector("#invoiceTable tbody");
 
@@ -78,17 +72,13 @@ function addRow(product) {
     };
 }
 
-// -----------------------------------------
 // Update qty in existing row
-// -----------------------------------------
 function updateQtyInTable(barcode) {
     const row = document.querySelector(`tr[data-barcode="${barcode}"]`);
     row.querySelector(".qtyCell").innerText = items[barcode].qty;
 }
 
-// -----------------------------------------
 // Notify server to delete item
-// -----------------------------------------
 function deleteFromServer(barcode) {
     fetch("/delete_item", {
         method: "POST",
@@ -97,9 +87,7 @@ function deleteFromServer(barcode) {
     });
 }
 
-// -----------------------------------------
 // Generate Invoice button
-// -----------------------------------------
 document.getElementById("generateInvoice").onclick = () => {
     window.location.href = "/generate_invoice";
 };
