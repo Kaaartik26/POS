@@ -1,6 +1,4 @@
-// ----------------------
 // START HTML5 QR SCANNER
-// ----------------------
 const html5QrCode = new Html5Qrcode("reader");
 let scanning = false;
 
@@ -20,9 +18,9 @@ function startScanner() {
     }).catch(err => console.error(err));
 }
 
-// Handle successful barcode scan
+// handling sacnning 
 function onScanSuccess(decodedText) {
-    if (scanning) return; // prevent multiple rapid scans
+    if (scanning) return; // prevent multiple simultaneous scans
     scanning = true;
 
     fetch("/lookup", {
@@ -36,18 +34,13 @@ function onScanSuccess(decodedText) {
             alert(item.error);
         } else {
             addToCart(item);
-            alert("Item added: " + item.name);  // <-- SHOW ALERT HERE
+            alert("Item added: " + item.name); 
         }
 
-        // Resume scanning ONLY when alert is closed
         scanning = false;
     });
 }
 
-
-// ----------------------
-// CART MANAGEMENT LOGIC
-// ----------------------
 
 // Add or update cart item
 function addToCart(item) {
@@ -123,12 +116,9 @@ document.getElementById("cartBody").addEventListener("click", function (e) {
     }
 });
 
-// ----------------------
 // GENERATE INVOICE
-// ----------------------
 document.getElementById("generateInvoice").addEventListener("click", () => {
     window.location.href = "/generate_invoice";
 });
 
-// Start scanner
 startScanner();

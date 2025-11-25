@@ -10,12 +10,10 @@ from reportlab.lib import colors
 app = Flask(__name__)
 app.secret_key = "secret-key"
 
-# Load Product List (from products.json)
+# loading products from json
 with open("products.json", "r") as f:
     PRODUCTS = json.load(f)
 
-
-# Homepage
 @app.route("/")
 def home():
     return render_template("invoice.html")
@@ -139,7 +137,5 @@ def generate_invoice():
                      download_name="invoice.pdf",
                      mimetype="application/pdf")
 
-
-# Run App
 if __name__ == "__main__":
     app.run(debug=True)
